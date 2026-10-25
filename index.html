@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thousand Routes | Return Load Booking</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-icon">↗</span><span>Thousand<span class="brand-accent">Routes</span></span></a>
+    <nav><a href="#how-it-works">How it works</a><a href="#loads">Available loads</a></nav>
+    <button class="nav-cta" id="postLoadTop">Post a load</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> SMARTER FREIGHT. FEWER EMPTY TRIPS.</div>
+        <h1>Every return trip<br />can carry <span>something more.</span></h1>
+        <p>Connect trucks heading home with people who need to move goods in the same direction. Better use of every journey.</p>
+        <div class="hero-actions">
+          <button class="primary-btn" id="findLoadsBtn">Find a truck <span>→</span></button>
+          <button class="secondary-btn" id="postLoadHero">List a return trip</button>
+        </div>
+        <div class="hero-note"><span>✓</span> More earning opportunities <span>✓</span> Less wasted capacity</div>
+      </div>
+      <div class="hero-visual">
+        <div class="route-card">
+          <div class="route-head"><span class="live-dot"></span> RETURN ROUTE MATCH</div>
+          <div class="route-stops">
+            <div class="stop"><span class="stop-dot origin"></span><div><small>TRUCK CURRENTLY IN</small><strong>Bengaluru</strong></div><span class="tag">Pickup</span></div>
+            <div class="route-line"><span>↕</span></div>
+            <div class="stop"><span class="stop-dot destination"></span><div><small>HEADING TO</small><strong>Chennai</strong></div><span class="tag green">Destination</span></div>
+          </div>
+          <div class="route-footer"><span>Available capacity</span><strong>6 tonnes</strong></div>
+          <div class="match-banner"><span>✦</span><div><strong>A shipment could match this route</strong><small>Find a load travelling the same way.</small></div></div>
+        </div>
+        <div class="floating-chip chip-top">↗ Return trip found</div>
+        <div class="floating-chip chip-bottom"><span class="mini-check">✓</span> Make every trip count</div>
+        <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div><strong>01</strong><span>List a truck's return route</span></div>
+      <div><strong>02</strong><span>Match with nearby shipments</span></div>
+      <div><strong>03</strong><span>Book and move the goods</span></div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <div class="section-heading"><div><div class="eyebrow">SIMPLE BY DESIGN</div><h2>Two sides. One smarter journey.</h2></div><p>Help truck owners find cargo and help customers find a truck that's already going their way.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card"><div class="feature-icon purple">↗</div><h3>For truck owners</h3><p>Share your return route and available capacity to discover suitable loads before heading back empty.</p><button class="text-btn" id="ownerFormBtn">List your truck →</button></article>
+        <article class="feature-card"><div class="feature-icon mint">▦</div><h3>For customers</h3><p>Post where your goods need to go and find trucks that can carry them along their planned journey.</p><button class="text-btn" id="customerFormBtn">Post a shipment →</button></article>
+        <article class="feature-card"><div class="feature-icon gold">♧</div><h3>For the environment</h3><p>Make better use of existing journeys and help reduce avoidable empty truck kilometres.</p><span class="impact-label">A more efficient way to move goods</span></article>
+      </div>
+    </section>
+
+    <section class="section loads-section" id="loads">
+      <div class="section-heading"><div><div class="eyebrow">DEMO LISTINGS</div><h2>Return trips available</h2></div><button class="secondary-btn" id="refreshBtn">Reset demo</button></div>
+      <div class="filter-row">
+        <label>From <select id="filterFrom"><option value="">Any city</option><option>Bengaluru</option><option>Coimbatore</option><option>Hyderabad</option><option>Pune</option></select></label>
+        <label>To <select id="filterTo"><option value="">Any destination</option><option>Chennai</option><option>Bengaluru</option><option>Coimbatore</option><option>Hyderabad</option></select></label>
+        <label>Minimum capacity <select id="filterCapacity"><option value="0">Any capacity</option><option value="2">2+ tonnes</option><option value="5">5+ tonnes</option><option value="10">10+ tonnes</option></select></label>
+        <button class="primary-btn filter-btn" id="applyFilters">Find matches</button>
+      </div>
+      <div class="loads-grid" id="loadsGrid"></div>
+      <p class="demo-note">Prototype demo data only — listings and bookings are stored in this browser session, not sent to a real transport provider.</p>
+    </section>
+
+    <section class="cta-strip">
+      <div><div class="eyebrow">THOUSAND ROUTES</div><h2>Turn an empty return into an opportunity.</h2><p>One journey. A better use of capacity.</p></div>
+      <button class="primary-btn" id="ctaPost">Get started <span>→</span></button>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#"><span class="brand-icon">↗</span><span>Thousand<span class="brand-accent">Routes</span></span></a><span>Prototype concept · Smarter return-load transportation</span></footer>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="close-modal" id="closeModal" aria-label="Close">×</button>
+      <div class="eyebrow">THOUSAND ROUTES</div><h2 id="modalTitle">Post a shipment</h2>
+      <p class="modal-intro" id="modalIntro">Tell us where your goods need to go.</p>
+      <form id="listingForm">
+        <input type="hidden" id="listingType" value="shipment" />
+        <div class="form-grid">
+          <label>Your name / business<input id="contactName" required placeholder="e.g. Green Leaf Traders" /></label>
+          <label>Goods type<input id="goodsType" required placeholder="e.g. packaged goods" /></label>
+          <label>Pickup city<select id="pickupCity" required><option value="">Choose city</option><option>Bengaluru</option><option>Chennai</option><option>Coimbatore</option><option>Hyderabad</option><option>Pune</option></select></label>
+          <label>Destination city<select id="destinationCity" required><option value="">Choose city</option><option>Chennai</option><option>Bengaluru</option><option>Coimbatore</option><option>Hyderabad</option><option>Pune</option></select></label>
+          <label>Cargo weight (tonnes)<input id="cargoWeight" type="number" min="0.1" step="0.1" required placeholder="e.g. 3" /></label>
+          <label>Available / needed date<input id="tripDate" type="date" required /></label>
+        </div>
+        <label class="full-label">Additional details<textarea id="details" rows="2" placeholder="Truck type, loading notes, preferred time..."></textarea></label>
+        <button class="primary-btn submit-btn" type="submit">Save listing <span>→</span></button>
+        <p class="form-message" id="formMessage" role="status"></p>
+      </form>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
